@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const REPO_URL = 'https://greqov.github.io/odin-cv-app/';
+const REPO_URL = 'https://github.com/greqov/odin-cv-app';
 
 export default class Footer extends Component {
   render() {
