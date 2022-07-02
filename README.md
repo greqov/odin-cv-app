@@ -1,18 +1,7 @@
-# React.js template project
+# React CV application
 
-## Features:
-
-- react
-- airbnb
-- eslint
-- prettier
-- webpack
-- babel
-- tailwindcss
-
-## TODO:
-
-- [ ] add tests support
+- Assignment: [Odin lesson "Project: CV application"](https://www.theodinproject.com/lessons/node-path-javascript-cv-application)
+- Live Preview: [https://greqov.github.io/odin-cv-app/](https://greqov.github.io/odin-cv-app/)
 
 ## Development
 
