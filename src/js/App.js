@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className="relative min-h-screen flex flex-col font-sans bg-zinc-50 selection:bg-pink-300">
         <Header />
         <Main />
         <Footer />
