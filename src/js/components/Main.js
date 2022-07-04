@@ -1,17 +1,57 @@
 import React, { Component } from 'react';
 import Input from './form/Input';
+import Info from './UI/Info';
 
 export default class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fullname: 'John Doe',
+      email: 'doe@john.de',
+      phone: '123456',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
   render() {
+    const infoElements = Object.entries(this.state).map(([label, value]) => (
+      <Info key={label} label={label} value={value} />
+    ));
+
     return (
       <main className="js-main container max-w-4xl mx-auto mb-6 px-4">
         <div className="grid gap-4 grid-cols-2">
           <div>
             <h2 className="block text-2xl font-bold">General info</h2>
 
-            <Input title="Full name" name="fullname" type="text" />
-            <Input title="Email" name="email" type="email" />
-            <Input title="Phone number" name="phone" type="text" />
+            <Input
+              title="Full name"
+              name="fullname"
+              type="text"
+              value={this.state.fullname}
+              handleChange={this.handleChange}
+            />
+            <Input
+              title="Email"
+              name="email"
+              type="email"
+              value={this.state.email}
+              handleChange={this.handleChange}
+            />
+            <Input
+              title="Phone number"
+              name="phone"
+              type="text"
+              value={this.state.phone}
+              handleChange={this.handleChange}
+            />
 
             <h2 className="block text-2xl font-bold">Education</h2>
             <h2 className="block text-2xl font-bold">Practice</h2>
@@ -57,10 +97,7 @@ export default class Main extends Component {
 
           <div>
             <h2 className="block text-2xl font-bold">CV</h2>
-            <div>
-              <span className="block font-bold">Label</span>
-              <span className="block">Lorem ipsum dolor sit amet.</span>
-            </div>
+            {infoElements}
           </div>
         </div>
       </main>
