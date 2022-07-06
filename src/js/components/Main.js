@@ -40,7 +40,7 @@ export default class Main extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.addEducationItem = this.addEducationItem.bind(this);
-    this.removeEducationItem = this.removeEducationItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
   handleChange(e, data) {
@@ -66,7 +66,7 @@ export default class Main extends Component {
     });
   }
 
-  removeEducationItem(e, data) {
+  removeItem(e, data) {
     const { id, category } = data;
     this.setState({
       [category]: this.state.education.filter((i) => i.id !== id),
@@ -120,7 +120,7 @@ export default class Main extends Component {
             handleChange={(e) => this.handleChange(e, data)}
           />
 
-          <Button label="Remove" handleClick={(e) => this.removeEducationItem(e, data)} />
+          <Button label="Remove" handleClick={(e) => this.removeItem(e, data)} />
         </div>
       );
     });
@@ -177,6 +177,8 @@ export default class Main extends Component {
             value={notes}
             handleChange={(e) => this.handleChange(e, data)}
           />
+
+          <Button label="Remove" handleClick={(e) => this.removeItem(e, data)} />
         </div>
       );
     });
