@@ -4,7 +4,7 @@ import Textarea from './form/Textarea';
 import Checkbox from './form/Checkbox';
 import Select from './form/Select';
 import Button from './form/Button';
-import Info from './UI/Info';
+// import Info from './UI/Info';
 
 export default class Main extends Component {
   constructor(props) {
@@ -14,100 +14,125 @@ export default class Main extends Component {
       email: 'doe@john.de',
       phone: '123456',
       notes: 'Such note!',
-      ongoing: false,
-      occupation_from: '',
-      occupation_to: '',
+      education: [
+        {
+          occupation: 'stu',
+          organization: 'sch #101',
+          from: '',
+          to: '',
+          ongoing: false,
+        },
+      ],
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
+  handleChange(e, idx) {
     const { name, value, type, checked } = e.target;
+    console.log(idx);
 
-    this.setState({
-      [name]: type === 'checkbox' ? checked : value,
-    });
+    if (idx !== undefined) {
+      const education = [...this.state.education];
+      const eduItem = education[idx];
+      eduItem[name] = type === 'checkbox' ? checked : value;
+      console.log(`eduItem`, eduItem);
+      this.setState({ education: [...education] });
+    } else {
+      this.setState({
+        [name]: type === 'checkbox' ? checked : value,
+      });
+    }
   }
 
   render() {
-    const infoElements = Object.entries(this.state).map(([label, value]) => (
-      <Info key={label} label={label} value={value} />
-    ));
+    const eduFields = this.state.education.map((item, index) => {
+      const { occupation, organization, from, to, ongoing } = item;
+
+      // TODO: use nanoid for index
+      return (
+        <div key={index}>
+          <Input
+            label="Title of the occupation"
+            name="occupation"
+            value={occupation}
+            handleChange={(e) => this.handleChange(e, index)}
+          />
+
+          <Input
+            label="Organization providing education and training"
+            name="organization"
+            value={organization}
+            handleChange={(e) => this.handleChange(e, index)}
+          />
+
+          <Input
+            label="From"
+            type="date"
+            name="from"
+            value={from}
+            handleChange={(e) => this.handleChange(e, index)}
+          />
+
+          <Input
+            label="To"
+            type="date"
+            name="to"
+            value={to}
+            handleChange={(e) => this.handleChange(e, index)}
+          />
+
+          <Checkbox
+            id="ongoing_label"
+            label="Ongoing"
+            name="ongoing"
+            checked={ongoing}
+            handleChange={(e) => this.handleChange(e, index)}
+          />
+        </div>
+      );
+    });
 
     return (
       <main className="js-main container max-w-4xl mx-auto mb-6 px-4">
         <div className="grid gap-4 grid-cols-2">
           <div>
             <h2 className="block text-2xl font-bold">Personal information</h2>
-            <Input
-              label="Full name"
-              name="fullname"
-              value={this.state.fullname}
-              handleChange={this.handleChange}
-            />
 
-            <Input
-              label="Email"
-              name="email"
-              type="email"
-              value={this.state.email}
-              handleChange={this.handleChange}
-            />
+            <div>
+              <Input
+                label="Full name"
+                name="fullname"
+                value={this.state.fullname}
+                handleChange={this.handleChange}
+              />
 
-            <Input
-              label="Phone number"
-              name="phone"
-              value={this.state.phone}
-              handleChange={this.handleChange}
-            />
+              <Input
+                label="Email"
+                name="email"
+                type="email"
+                value={this.state.email}
+                handleChange={this.handleChange}
+              />
 
-            <Textarea
-              label="Notes"
-              name="notes"
-              value={this.state.notes}
-              handleChange={this.handleChange}
-            />
+              <Input
+                label="Phone number"
+                name="phone"
+                value={this.state.phone}
+                handleChange={this.handleChange}
+              />
+
+              <Textarea
+                label="Notes"
+                name="notes"
+                value={this.state.notes}
+                handleChange={this.handleChange}
+              />
+            </div>
 
             <h2 className="block text-2xl font-bold">Education and Training</h2>
 
-            <Input
-              label="Title of the occupation"
-              name="occupation"
-              value={this.state.occupation}
-              handleChange={this.handleChange}
-            />
-
-            <Input
-              label="Organization providing education and training"
-              name="organization"
-              value={this.state.organization}
-              handleChange={this.handleChange}
-            />
-
-            <Input
-              label="From"
-              type="date"
-              name="occupation_from"
-              value={this.state.occupation_from}
-              handleChange={this.handleChange}
-            />
-
-            <Input
-              label="To"
-              type="date"
-              name="occupation_to"
-              value={this.state.occupation_to}
-              handleChange={this.handleChange}
-            />
-
-            <Checkbox
-              id="ongoing_label"
-              label="Ongoing"
-              name="ongoing"
-              checked={this.state.ongoing}
-              handleChange={this.handleChange}
-            />
+            {eduFields}
 
             <Button label="Add" />
 
@@ -118,7 +143,6 @@ export default class Main extends Component {
 
           <div>
             <h2 className="block text-2xl font-bold">CV</h2>
-            {infoElements}
           </div>
         </div>
       </main>
