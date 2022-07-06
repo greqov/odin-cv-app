@@ -13,6 +13,7 @@
 - [ ] add required attributes to fields
 - [ ] add sane UI
 - [ ] add localStorage support
+- [ ] add button for loading demo data
 
 ## Development
 

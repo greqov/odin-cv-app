@@ -29,10 +29,15 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullname: 'John Doe',
-      email: 'doe@john.de',
-      phone: '123456',
-      notes: 'Such note!',
+      personal: [
+        {
+          id: 0,
+          fullname: '',
+          email: '',
+          phone: '',
+          notes: '',
+        },
+      ],
       education: [createEducationItem()],
       work: [createWorkItem()],
     };
@@ -52,10 +57,6 @@ export default class Main extends Component {
 
       categoryItem[name] = type === 'checkbox' ? checked : value;
       this.setState({ [category]: [...categoryData] });
-    } else {
-      this.setState({
-        [name]: type === 'checkbox' ? checked : value,
-      });
     }
   }
 
@@ -73,7 +74,48 @@ export default class Main extends Component {
   }
 
   render() {
-    const eduFields = this.state.education.map((item) => {
+    const personalFields = this.state.personal.map((item) => {
+      const { fullname, email, phone, notes } = item;
+      const data = {
+        category: 'personal',
+        id: 0,
+      };
+
+      return (
+        <div key={0}>
+          <Input
+            label="Full name"
+            name="fullname"
+            value={fullname}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            value={email}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+
+          <Input
+            label="Phone number"
+            name="phone"
+            value={phone}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+
+          <Textarea
+            label="Notes"
+            name="notes"
+            value={notes}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+        </div>
+      );
+    });
+
+    const educationFields = this.state.education.map((item) => {
       const { id, occupation, organization, from, to, ongoing } = item;
       const data = {
         category: 'education',
@@ -188,40 +230,11 @@ export default class Main extends Component {
           <div>
             <h2 className="block mb-4 text-2xl font-bold">Personal information</h2>
 
-            <div>
-              <Input
-                label="Full name"
-                name="fullname"
-                value={this.state.fullname}
-                handleChange={this.handleChange}
-              />
-
-              <Input
-                label="Email"
-                name="email"
-                type="email"
-                value={this.state.email}
-                handleChange={this.handleChange}
-              />
-
-              <Input
-                label="Phone number"
-                name="phone"
-                value={this.state.phone}
-                handleChange={this.handleChange}
-              />
-
-              <Textarea
-                label="Notes"
-                name="notes"
-                value={this.state.notes}
-                handleChange={this.handleChange}
-              />
-            </div>
+            {personalFields}
 
             <h2 className="block mb-4 text-2xl font-bold">Education and Training</h2>
 
-            {eduFields}
+            {educationFields}
 
             <Button
               label="Add"
