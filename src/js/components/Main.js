@@ -29,6 +29,7 @@ export default class Main extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.addEducationItem = this.addEducationItem.bind(this);
+    this.removeEducationItem = this.removeEducationItem.bind(this);
   }
 
   handleChange(e, id) {
@@ -54,10 +55,15 @@ export default class Main extends Component {
     });
   }
 
+  removeEducationItem(e, id) {
+    this.setState({
+      education: this.state.education.filter((i) => i.id !== id),
+    });
+  }
+
   render() {
     const eduFields = this.state.education.map((item) => {
       const { id, occupation, organization, from, to, ongoing } = item;
-      // TODO: delete button
       // TODO: render education info
 
       return (
@@ -66,7 +72,6 @@ export default class Main extends Component {
             label="Title of the occupation"
             name="occupation"
             value={occupation}
-      // TODO: add button
             handleChange={(e) => this.handleChange(e, id)}
           />
 
@@ -100,6 +105,8 @@ export default class Main extends Component {
             checked={ongoing}
             handleChange={(e) => this.handleChange(e, id)}
           />
+
+          <Button label="Remove" handleClick={(e) => this.removeEducationItem(e, id)} />
         </div>
       );
     });
