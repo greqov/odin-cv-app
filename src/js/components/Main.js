@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 import Input from './form/Input';
 import Textarea from './form/Textarea';
 import Checkbox from './form/Checkbox';
-import Select from './form/Select';
 import Button from './form/Button';
 import Preview from './Preview';
 
@@ -39,7 +38,7 @@ export default class Main extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.addEducationItem = this.addEducationItem.bind(this);
+    this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
   }
 
@@ -60,16 +59,16 @@ export default class Main extends Component {
     }
   }
 
-  addEducationItem() {
+  addItem(category, cb) {
     this.setState({
-      education: [...this.state.education, createEducationItem()],
+      [category]: [...this.state[category], cb()],
     });
   }
 
   removeItem(e, data) {
     const { id, category } = data;
     this.setState({
-      [category]: this.state.education.filter((i) => i.id !== id),
+      [category]: this.state[category].filter((i) => i.id !== id),
     });
   }
 
@@ -224,11 +223,16 @@ export default class Main extends Component {
 
             {eduFields}
 
-            <Button label="Add" handleClick={this.addEducationItem} />
+            <Button
+              label="Add"
+              handleClick={() => this.addItem('education', createEducationItem)}
+            />
 
             <h2 className="block mb-4 text-2xl font-bold">Work Experience</h2>
 
             {workFields}
+
+            <Button label="Add" handleClick={() => this.addItem('work', createWorkItem)} />
           </div>
 
           <Preview data={this.state} />
