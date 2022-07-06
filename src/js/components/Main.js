@@ -64,7 +64,6 @@ export default class Main extends Component {
   render() {
     const eduFields = this.state.education.map((item) => {
       const { id, occupation, organization, from, to, ongoing } = item;
-      // TODO: render education info
 
       return (
         <div key={id}>
@@ -99,7 +98,6 @@ export default class Main extends Component {
           />
 
           <Checkbox
-            id="ongoing_label"
             label="Ongoing"
             name="ongoing"
             checked={ongoing}
