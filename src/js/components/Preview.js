@@ -26,6 +26,21 @@ export default class Preview extends Component {
             </div>
           );
         })}
+
+        <h2 className="block mb-4 text-2xl font-bold">Work Experience</h2>
+
+        {data.work.map((item) => {
+          const { id, occupation, employer, from, to, ongoing, notes } = item;
+          const periodText = from ? `${from} — ${ongoing ? 'Present' : to}` : '';
+          return (
+            <div key={id}>
+              <Info label="Title of the occupation" value={occupation} />
+              <Info label="Employer" value={employer} />
+              <Info label="Period" value={periodText} />
+              <Info label="Notes" value={notes} />
+            </div>
+          );
+        })}
       </div>
     );
   }

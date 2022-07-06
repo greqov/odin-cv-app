@@ -16,6 +16,16 @@ const createEducationItem = () => ({
   ongoing: false,
 });
 
+const createWorkItem = () => ({
+  id: nanoid(),
+  occupation: '',
+  employer: '',
+  from: '',
+  to: '',
+  ongoing: false,
+  notes: '',
+});
+
 export default class Main extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +35,7 @@ export default class Main extends Component {
       phone: '123456',
       notes: 'Such note!',
       education: [createEducationItem()],
+      work: [createWorkItem()],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,16 +43,16 @@ export default class Main extends Component {
     this.removeEducationItem = this.removeEducationItem.bind(this);
   }
 
-  handleChange(e, id) {
+  handleChange(e, data) {
     const { name, value, type, checked } = e.target;
+    const { category, id } = data;
 
-    if (id !== undefined) {
-      const education = [...this.state.education];
-      const eduItem = education.find((i) => i.id === id);
+    if (data !== undefined) {
+      const categoryData = [...this.state[category]];
+      const categoryItem = categoryData.find((i) => i.id === id);
 
-      eduItem[name] = type === 'checkbox' ? checked : value;
-      console.log(`eduItem`, eduItem);
-      this.setState({ education: [...education] });
+      categoryItem[name] = type === 'checkbox' ? checked : value;
+      this.setState({ [category]: [...categoryData] });
     } else {
       this.setState({
         [name]: type === 'checkbox' ? checked : value,
@@ -55,15 +66,20 @@ export default class Main extends Component {
     });
   }
 
-  removeEducationItem(e, id) {
+  removeEducationItem(e, data) {
+    const { id, category } = data;
     this.setState({
-      education: this.state.education.filter((i) => i.id !== id),
+      [category]: this.state.education.filter((i) => i.id !== id),
     });
   }
 
   render() {
     const eduFields = this.state.education.map((item) => {
       const { id, occupation, organization, from, to, ongoing } = item;
+      const data = {
+        category: 'education',
+        id,
+      };
 
       return (
         <div key={id}>
@@ -71,14 +87,14 @@ export default class Main extends Component {
             label="Title of the occupation"
             name="occupation"
             value={occupation}
-            handleChange={(e) => this.handleChange(e, id)}
+            handleChange={(e) => this.handleChange(e, data)}
           />
 
           <Input
-            label="Organization providing education and training"
+            label="Organization provdataing education and training"
             name="organization"
             value={organization}
-            handleChange={(e) => this.handleChange(e, id)}
+            handleChange={(e) => this.handleChange(e, data)}
           />
 
           <Input
@@ -86,7 +102,7 @@ export default class Main extends Component {
             type="date"
             name="from"
             value={from}
-            handleChange={(e) => this.handleChange(e, id)}
+            handleChange={(e) => this.handleChange(e, data)}
           />
 
           <Input
@@ -94,17 +110,73 @@ export default class Main extends Component {
             type="date"
             name="to"
             value={to}
-            handleChange={(e) => this.handleChange(e, id)}
+            handleChange={(e) => this.handleChange(e, data)}
           />
 
           <Checkbox
             label="Ongoing"
             name="ongoing"
             checked={ongoing}
-            handleChange={(e) => this.handleChange(e, id)}
+            handleChange={(e) => this.handleChange(e, data)}
           />
 
-          <Button label="Remove" handleClick={(e) => this.removeEducationItem(e, id)} />
+          <Button label="Remove" handleClick={(e) => this.removeEducationItem(e, data)} />
+        </div>
+      );
+    });
+
+    const workFields = this.state.work.map((item) => {
+      const { id, occupation, employer, from, to, ongoing, notes } = item;
+      const data = {
+        category: 'work',
+        id,
+      };
+
+      return (
+        <div key={id}>
+          <Input
+            label="Title of the occupation"
+            name="occupation"
+            value={occupation}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+
+          <Input
+            label="Employer"
+            name="employer"
+            value={employer}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+
+          <Input
+            label="From"
+            type="date"
+            name="from"
+            value={from}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+
+          <Input
+            label="To"
+            type="date"
+            name="to"
+            value={to}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+
+          <Checkbox
+            label="Ongoing"
+            name="ongoing"
+            checked={ongoing}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
+
+          <Textarea
+            label="Main activities and responsibilities"
+            name="notes"
+            value={notes}
+            handleChange={(e) => this.handleChange(e, data)}
+          />
         </div>
       );
     });
@@ -154,7 +226,7 @@ export default class Main extends Component {
 
             <h2 className="block mb-4 text-2xl font-bold">Work Experience</h2>
 
-            <Select />
+            {workFields}
           </div>
 
           <Preview data={this.state} />
