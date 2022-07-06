@@ -15,6 +15,8 @@ export default class Main extends Component {
       phone: '123456',
       notes: 'Such note!',
       ongoing: false,
+      occupation_from: '',
+      occupation_to: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -85,15 +87,17 @@ export default class Main extends Component {
 
             <Input
               label="From"
-              name="occupation"
-              value={this.state.occupation}
+              type="date"
+              name="occupation_from"
+              value={this.state.occupation_from}
               handleChange={this.handleChange}
             />
 
             <Input
               label="To"
-              name="occupation"
-              value={this.state.occupation}
+              type="date"
+              name="occupation_to"
+              value={this.state.occupation_to}
               handleChange={this.handleChange}
             />
 
