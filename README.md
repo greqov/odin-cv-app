@@ -3,6 +3,17 @@
 - Assignment: [Odin lesson "Project: CV application"](https://www.theodinproject.com/lessons/node-path-javascript-cv-application)
 - Live Preview: [https://greqov.github.io/odin-cv-app/](https://greqov.github.io/odin-cv-app/)
 
+## Features
+
+- [ ] it works
+- [ ] utilize React class components
+
+## TODO:
+
+- [ ] add required attributes to fields
+- [ ] add sane UI
+- [ ] add localStorage support
+
 ## Development
 
 - build a project
