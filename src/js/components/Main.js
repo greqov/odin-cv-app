@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Input from './form/Input';
+import Textarea from './form/Textarea';
 import Info from './UI/Info';
 
 export default class Main extends Component {
@@ -9,6 +10,7 @@ export default class Main extends Component {
       fullname: 'John Doe',
       email: 'doe@john.de',
       phone: '123456',
+      notes: 'Such note!',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -50,6 +52,12 @@ export default class Main extends Component {
               name="phone"
               type="text"
               value={this.state.phone}
+              handleChange={this.handleChange}
+            />
+            <Textarea
+              title="Notes"
+              name="notes"
+              value={this.state.notes}
               handleChange={this.handleChange}
             />
 
