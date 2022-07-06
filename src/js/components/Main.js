@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 import Input from './form/Input';
 import Textarea from './form/Textarea';
 import Checkbox from './form/Checkbox';
 import Select from './form/Select';
 import Button from './form/Button';
-// import Info from './UI/Info';
+import Preview from './Preview';
+
+const createEducationItem = () => ({
+  id: nanoid(),
+  occupation: '',
+  organization: '',
+  from: '',
+  to: '',
+  ongoing: false,
+});
 
 export default class Main extends Component {
   constructor(props) {
@@ -14,27 +24,21 @@ export default class Main extends Component {
       email: 'doe@john.de',
       phone: '123456',
       notes: 'Such note!',
-      education: [
-        {
-          occupation: 'stu',
-          organization: 'sch #101',
-          from: '',
-          to: '',
-          ongoing: false,
-        },
-      ],
+      education: [createEducationItem()],
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.addEducationItem = this.addEducationItem.bind(this);
+    this.removeEducationItem = this.removeEducationItem.bind(this);
   }
 
-  handleChange(e, idx) {
+  handleChange(e, id) {
     const { name, value, type, checked } = e.target;
-    console.log(idx);
 
-    if (idx !== undefined) {
+    if (id !== undefined) {
       const education = [...this.state.education];
-      const eduItem = education[idx];
+      const eduItem = education.find((i) => i.id === id);
+
       eduItem[name] = type === 'checkbox' ? checked : value;
       console.log(`eduItem`, eduItem);
       this.setState({ education: [...education] });
@@ -45,25 +49,36 @@ export default class Main extends Component {
     }
   }
 
-  render() {
-    const eduFields = this.state.education.map((item, index) => {
-      const { occupation, organization, from, to, ongoing } = item;
+  addEducationItem() {
+    this.setState({
+      education: [...this.state.education, createEducationItem()],
+    });
+  }
 
-      // TODO: use nanoid for index
+  removeEducationItem(e, id) {
+    this.setState({
+      education: this.state.education.filter((i) => i.id !== id),
+    });
+  }
+
+  render() {
+    const eduFields = this.state.education.map((item) => {
+      const { id, occupation, organization, from, to, ongoing } = item;
+
       return (
-        <div key={index}>
+        <div key={id}>
           <Input
             label="Title of the occupation"
             name="occupation"
             value={occupation}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
 
           <Input
             label="Organization providing education and training"
             name="organization"
             value={organization}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
 
           <Input
@@ -71,7 +86,7 @@ export default class Main extends Component {
             type="date"
             name="from"
             value={from}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
 
           <Input
@@ -79,16 +94,17 @@ export default class Main extends Component {
             type="date"
             name="to"
             value={to}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
 
           <Checkbox
-            id="ongoing_label"
             label="Ongoing"
             name="ongoing"
             checked={ongoing}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
+
+          <Button label="Remove" handleClick={(e) => this.removeEducationItem(e, id)} />
         </div>
       );
     });
@@ -97,7 +113,7 @@ export default class Main extends Component {
       <main className="js-main container max-w-4xl mx-auto mb-6 px-4">
         <div className="grid gap-4 grid-cols-2">
           <div>
-            <h2 className="block text-2xl font-bold">Personal information</h2>
+            <h2 className="block mb-4 text-2xl font-bold">Personal information</h2>
 
             <div>
               <Input
@@ -130,20 +146,18 @@ export default class Main extends Component {
               />
             </div>
 
-            <h2 className="block text-2xl font-bold">Education and Training</h2>
+            <h2 className="block mb-4 text-2xl font-bold">Education and Training</h2>
 
             {eduFields}
 
-            <Button label="Add" />
+            <Button label="Add" handleClick={this.addEducationItem} />
 
-            <h2 className="block text-2xl font-bold">Work Experience</h2>
+            <h2 className="block mb-4 text-2xl font-bold">Work Experience</h2>
 
             <Select />
           </div>
 
-          <div>
-            <h2 className="block text-2xl font-bold">CV</h2>
-          </div>
+          <Preview data={this.state} />
         </div>
       </main>
     );
