@@ -5,7 +5,7 @@ import Textarea from './form/Textarea';
 import Checkbox from './form/Checkbox';
 import Select from './form/Select';
 import Button from './form/Button';
-// import Info from './UI/Info';
+import Preview from './Preview';
 
 const createEducationItem = () => ({
   id: nanoid(),
@@ -115,7 +115,7 @@ export default class Main extends Component {
       <main className="js-main container max-w-4xl mx-auto mb-6 px-4">
         <div className="grid gap-4 grid-cols-2">
           <div>
-            <h2 className="block text-2xl font-bold">Personal information</h2>
+            <h2 className="block mb-4 text-2xl font-bold">Personal information</h2>
 
             <div>
               <Input
@@ -148,20 +148,18 @@ export default class Main extends Component {
               />
             </div>
 
-            <h2 className="block text-2xl font-bold">Education and Training</h2>
+            <h2 className="block mb-4 text-2xl font-bold">Education and Training</h2>
 
             {eduFields}
 
             <Button label="Add" handleClick={this.addEducationItem} />
 
-            <h2 className="block text-2xl font-bold">Work Experience</h2>
+            <h2 className="block mb-4 text-2xl font-bold">Work Experience</h2>
 
             <Select />
           </div>
 
-          <div>
-            <h2 className="block text-2xl font-bold">CV</h2>
-          </div>
+          <Preview data={this.state} />
         </div>
       </main>
     );
