@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Input from './form/Input';
 import Textarea from './form/Textarea';
+import Checkbox from './form/Checkbox';
+import Select from './form/Select';
+import Button from './form/Button';
 import Info from './UI/Info';
 
 export default class Main extends Component {
@@ -11,14 +14,17 @@ export default class Main extends Component {
       email: 'doe@john.de',
       phone: '123456',
       notes: 'Such note!',
+      ongoing: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
+    const { name, value, type, checked } = e.target;
+
     this.setState({
-      [e.target.name]: e.target.value,
+      [name]: type === 'checkbox' ? checked : value,
     });
   }
 
@@ -31,76 +37,79 @@ export default class Main extends Component {
       <main className="js-main container max-w-4xl mx-auto mb-6 px-4">
         <div className="grid gap-4 grid-cols-2">
           <div>
-            <h2 className="block text-2xl font-bold">General info</h2>
-
+            <h2 className="block text-2xl font-bold">Personal information</h2>
             <Input
-              title="Full name"
+              label="Full name"
               name="fullname"
-              type="text"
               value={this.state.fullname}
               handleChange={this.handleChange}
             />
+
             <Input
-              title="Email"
+              label="Email"
               name="email"
               type="email"
               value={this.state.email}
               handleChange={this.handleChange}
             />
+
             <Input
-              title="Phone number"
+              label="Phone number"
               name="phone"
-              type="text"
               value={this.state.phone}
               handleChange={this.handleChange}
             />
+
             <Textarea
-              title="Notes"
+              label="Notes"
               name="notes"
               value={this.state.notes}
               handleChange={this.handleChange}
             />
 
-            <h2 className="block text-2xl font-bold">Education</h2>
-            <h2 className="block text-2xl font-bold">Practice</h2>
+            <h2 className="block text-2xl font-bold">Education and Training</h2>
 
-            <button
-              className="inline-flex px-4 py-2 text-white bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-md transition select-none"
-              type="button"
-            >
-              Such button
-            </button>
+            <Input
+              label="Title of the occupation"
+              name="occupation"
+              value={this.state.occupation}
+              handleChange={this.handleChange}
+            />
 
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="todoComplete"
-                  name="complete"
-                  type="checkbox"
-                  className="focus:ring-sky-500 h-4 w-4 text-sky-500 border-slate-300 rounded"
-                />
-              </div>
-              <div className="ml-3">
-                <label htmlFor="todoComplete" className="font-medium text-slate-700">
-                  Complete?
-                </label>
-              </div>
-            </div>
+            <Input
+              label="Organization providing education and training"
+              name="organization"
+              value={this.state.organization}
+              handleChange={this.handleChange}
+            />
 
-            <div className="">
-              <label htmlFor="priority" className="block font-medium text-slate-700">
-                Priority
-              </label>
-              <select
-                id="priority"
-                name="priority"
-                className="mt-1 block w-full py-2 px-3 border border-slate-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500"
-              >
-                <option value="low">Low</option>
-                <option value="middle">Middle</option>
-                <option value="high">High</option>
-              </select>
-            </div>
+            <Input
+              label="From"
+              name="occupation"
+              value={this.state.occupation}
+              handleChange={this.handleChange}
+            />
+
+            <Input
+              label="To"
+              name="occupation"
+              value={this.state.occupation}
+              handleChange={this.handleChange}
+            />
+
+            <Checkbox
+              id="ongoing_label"
+              label="Ongoing"
+              name="ongoing"
+              checked={this.state.ongoing}
+              handleChange={this.handleChange}
+            />
+
+            <Button label="Add" />
+
+            <h2 className="block text-2xl font-bold">Work Experience</h2>
+
+            <Select />
           </div>
 
           <div>
