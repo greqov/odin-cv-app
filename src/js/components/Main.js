@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 import Input from './form/Input';
 import Textarea from './form/Textarea';
 import Checkbox from './form/Checkbox';
@@ -16,6 +17,7 @@ export default class Main extends Component {
       notes: 'Such note!',
       education: [
         {
+          id: nanoid(),
           occupation: 'stu',
           organization: 'sch #101',
           from: '',
@@ -28,13 +30,13 @@ export default class Main extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e, idx) {
+  handleChange(e, id) {
     const { name, value, type, checked } = e.target;
-    console.log(idx);
 
-    if (idx !== undefined) {
+    if (id !== undefined) {
       const education = [...this.state.education];
-      const eduItem = education[idx];
+      const eduItem = education.find((i) => i.id === id);
+
       eduItem[name] = type === 'checkbox' ? checked : value;
       console.log(`eduItem`, eduItem);
       this.setState({ education: [...education] });
@@ -46,24 +48,26 @@ export default class Main extends Component {
   }
 
   render() {
-    const eduFields = this.state.education.map((item, index) => {
-      const { occupation, organization, from, to, ongoing } = item;
+    const eduFields = this.state.education.map((item) => {
+      const { id, occupation, organization, from, to, ongoing } = item;
+      // TODO: add button
+      // TODO: delete button
+      // TODO: render education info
 
-      // TODO: use nanoid for index
       return (
-        <div key={index}>
+        <div key={id}>
           <Input
             label="Title of the occupation"
             name="occupation"
             value={occupation}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
 
           <Input
             label="Organization providing education and training"
             name="organization"
             value={organization}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
 
           <Input
@@ -71,7 +75,7 @@ export default class Main extends Component {
             type="date"
             name="from"
             value={from}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
 
           <Input
@@ -79,7 +83,7 @@ export default class Main extends Component {
             type="date"
             name="to"
             value={to}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
 
           <Checkbox
@@ -87,7 +91,7 @@ export default class Main extends Component {
             label="Ongoing"
             name="ongoing"
             checked={ongoing}
-            handleChange={(e) => this.handleChange(e, index)}
+            handleChange={(e) => this.handleChange(e, id)}
           />
         </div>
       );
