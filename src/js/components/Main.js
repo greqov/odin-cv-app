@@ -7,6 +7,15 @@ import Select from './form/Select';
 import Button from './form/Button';
 // import Info from './UI/Info';
 
+const createEducationItem = () => ({
+  id: nanoid(),
+  occupation: '',
+  organization: '',
+  from: '',
+  to: '',
+  ongoing: false,
+});
+
 export default class Main extends Component {
   constructor(props) {
     super(props);
@@ -15,19 +24,11 @@ export default class Main extends Component {
       email: 'doe@john.de',
       phone: '123456',
       notes: 'Such note!',
-      education: [
-        {
-          id: nanoid(),
-          occupation: 'stu',
-          organization: 'sch #101',
-          from: '',
-          to: '',
-          ongoing: false,
-        },
-      ],
+      education: [createEducationItem()],
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.addEducationItem = this.addEducationItem.bind(this);
   }
 
   handleChange(e, id) {
@@ -47,10 +48,15 @@ export default class Main extends Component {
     }
   }
 
+  addEducationItem() {
+    this.setState({
+      education: [...this.state.education, createEducationItem()],
+    });
+  }
+
   render() {
     const eduFields = this.state.education.map((item) => {
       const { id, occupation, organization, from, to, ongoing } = item;
-      // TODO: add button
       // TODO: delete button
       // TODO: render education info
 
@@ -60,6 +66,7 @@ export default class Main extends Component {
             label="Title of the occupation"
             name="occupation"
             value={occupation}
+      // TODO: add button
             handleChange={(e) => this.handleChange(e, id)}
           />
 
@@ -138,7 +145,7 @@ export default class Main extends Component {
 
             {eduFields}
 
-            <Button label="Add" />
+            <Button label="Add" handleClick={this.addEducationItem} />
 
             <h2 className="block text-2xl font-bold">Work Experience</h2>
 
