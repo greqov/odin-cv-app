@@ -8,14 +8,14 @@ export default class Preview extends Component {
 
     return (
       <div>
-        <h2 className="block mb-4 text-2xl font-bold">Personal information</h2>
+        <h2 className="block my-4 text-2xl font-bold">Personal information</h2>
 
         <Info label="Full name" value={personalData.fullname} />
         <Info label="Email" value={personalData.email} />
         <Info label="Phone" value={personalData.phone} />
         <Info label="Notes name" value={personalData.notes} />
 
-        <h2 className="block mb-4 text-2xl font-bold">Education and Training</h2>
+        <h2 className="block my-4 pt-2 text-2xl font-bold">Education and Training</h2>
 
         {data.education.map((item) => {
           const { id, occupation, organization, from, to, ongoing } = item;
@@ -29,7 +29,7 @@ export default class Preview extends Component {
           );
         })}
 
-        <h2 className="block mb-4 text-2xl font-bold">Work Experience</h2>
+        <h2 className="block my-4 pt-2 text-2xl font-bold">Work Experience</h2>
 
         {data.work.map((item) => {
           const { id, occupation, employer, from, to, ongoing, notes } = item;

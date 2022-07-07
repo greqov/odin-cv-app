@@ -38,8 +38,8 @@ export default class Main extends Component {
           notes: '',
         },
       ],
-      education: [createEducationItem()],
-      work: [createWorkItem()],
+      education: [],
+      work: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -82,35 +82,43 @@ export default class Main extends Component {
       };
 
       return (
-        <div key={0}>
-          <Input
-            label="Full name"
-            name="fullname"
-            value={fullname}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+        <div key={0} className="pb-1">
+          <div className="mb-4">
+            <Input
+              label="Full name"
+              name="fullname"
+              value={fullname}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Input
-            label="Email"
-            name="email"
-            type="email"
-            value={email}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Input
+              label="Email"
+              name="email"
+              type="email"
+              value={email}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Input
-            label="Phone number"
-            name="phone"
-            value={phone}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Input
+              label="Phone number"
+              name="phone"
+              value={phone}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Textarea
-            label="Notes"
-            name="notes"
-            value={notes}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Textarea
+              label="Notes"
+              name="notes"
+              value={notes}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
         </div>
       );
     });
@@ -123,43 +131,53 @@ export default class Main extends Component {
       };
 
       return (
-        <div key={id}>
-          <Input
-            label="Title of the occupation"
-            name="occupation"
-            value={occupation}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+        <div key={id} className="pb-4">
+          <div className="mb-4">
+            <Input
+              label="Title of the occupation"
+              name="occupation"
+              value={occupation}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Input
-            label="Organization provdataing education and training"
-            name="organization"
-            value={organization}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Input
+              label="Organization provdataing education and training"
+              name="organization"
+              value={organization}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Input
-            label="From"
-            type="date"
-            name="from"
-            value={from}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Input
+              label="From"
+              type="date"
+              name="from"
+              value={from}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Input
-            label="To"
-            type="date"
-            name="to"
-            value={to}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Input
+              label="To"
+              type="date"
+              name="to"
+              value={to}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Checkbox
-            label="Ongoing"
-            name="ongoing"
-            checked={ongoing}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Checkbox
+              label="Ongoing"
+              name="ongoing"
+              checked={ongoing}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
           <Button label="Remove" handleClick={(e) => this.removeItem(e, data)} />
         </div>
@@ -174,50 +192,62 @@ export default class Main extends Component {
       };
 
       return (
-        <div key={id}>
-          <Input
-            label="Title of the occupation"
-            name="occupation"
-            value={occupation}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+        <div key={id} className="pb-4">
+          <div className="mb-4">
+            <Input
+              label="Title of the occupation"
+              name="occupation"
+              value={occupation}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Input
-            label="Employer"
-            name="employer"
-            value={employer}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Input
+              label="Employer"
+              name="employer"
+              value={employer}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Input
-            label="From"
-            type="date"
-            name="from"
-            value={from}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Input
+              label="From"
+              type="date"
+              name="from"
+              value={from}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Input
-            label="To"
-            type="date"
-            name="to"
-            value={to}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Input
+              label="To"
+              type="date"
+              name="to"
+              value={to}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Checkbox
-            label="Ongoing"
-            name="ongoing"
-            checked={ongoing}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Checkbox
+              label="Ongoing"
+              name="ongoing"
+              checked={ongoing}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
-          <Textarea
-            label="Main activities and responsibilities"
-            name="notes"
-            value={notes}
-            handleChange={(e) => this.handleChange(e, data)}
-          />
+          <div className="mb-4">
+            <Textarea
+              label="Main activities and responsibilities"
+              name="notes"
+              value={notes}
+              handleChange={(e) => this.handleChange(e, data)}
+            />
+          </div>
 
           <Button label="Remove" handleClick={(e) => this.removeItem(e, data)} />
         </div>
@@ -228,24 +258,28 @@ export default class Main extends Component {
       <main className="js-main container max-w-4xl mx-auto mb-6 px-4">
         <div className="grid gap-4 grid-cols-2">
           <div>
-            <h2 className="block mb-4 text-2xl font-bold">Personal information</h2>
+            <h2 className="block my-4 text-2xl font-bold">Personal information</h2>
 
             {personalFields}
 
-            <h2 className="block mb-4 text-2xl font-bold">Education and Training</h2>
+            <h2 className="block my-4 text-2xl font-bold">Education and Training</h2>
 
             {educationFields}
 
-            <Button
-              label="Add"
-              handleClick={() => this.addItem('education', createEducationItem)}
-            />
+            <div className="text-right">
+              <Button
+                label="Add"
+                handleClick={() => this.addItem('education', createEducationItem)}
+              />
+            </div>
 
-            <h2 className="block mb-4 text-2xl font-bold">Work Experience</h2>
+            <h2 className="block my-4 text-2xl font-bold">Work Experience</h2>
 
             {workFields}
 
-            <Button label="Add" handleClick={() => this.addItem('work', createWorkItem)} />
+            <div className="text-right">
+              <Button label="Add" handleClick={() => this.addItem('work', createWorkItem)} />
+            </div>
           </div>
 
           <Preview data={this.state} />

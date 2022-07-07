@@ -5,7 +5,7 @@ export default class Checkbox extends Component {
     const { label, name, checked, handleChange } = this.props;
 
     return (
-      <div className="py-3">
+      <div className="py-2">
         <label className="inline-flex items-center font-medium text-slate-700">
           <input
             name={name}
