@@ -5,8 +5,8 @@
 
 ## Features
 
-- [ ] it works despite low effort
-- [ ] utilize React class components
+- it works despite low effort
+- utilize React class components
 
 ## TODO:
 
