@@ -39,7 +39,7 @@ export default class Preview extends Component {
               <Info label="Title of the occupation" value={occupation} />
               <Info label="Employer" value={employer} />
               <Info label="Period" value={periodText} />
-              <Info label="Notes" value={notes} />
+              <Info label="Main activities and responsibilities" value={notes} />
             </div>
           );
         })}

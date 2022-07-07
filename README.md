@@ -5,7 +5,7 @@
 
 ## Features
 
-- [ ] it works
+- [ ] it works despite low effort
 - [ ] utilize React class components
 
 ## TODO:
@@ -14,6 +14,7 @@
 - [ ] add sane UI
 - [ ] add localStorage support
 - [ ] add button for loading demo data
+- [ ] add 'print' button
 
 ## Development
 
