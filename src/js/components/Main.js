@@ -143,7 +143,7 @@ export default class Main extends Component {
 
           <div className="mb-4">
             <Input
-              label="Organization provdataing education and training"
+              label="Organization providing education and training"
               name="organization"
               value={organization}
               handleChange={(e) => this.handleChange(e, data)}
