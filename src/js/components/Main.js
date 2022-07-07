@@ -179,7 +179,11 @@ export default class Main extends Component {
             />
           </div>
 
-          <Button label="Remove" handleClick={(e) => this.removeItem(e, data)} />
+          <Button
+            label="Remove"
+            appearance="secondary"
+            handleClick={(e) => this.removeItem(e, data)}
+          />
         </div>
       );
     });
@@ -249,14 +253,18 @@ export default class Main extends Component {
             />
           </div>
 
-          <Button label="Remove" handleClick={(e) => this.removeItem(e, data)} />
+          <Button
+            label="Remove"
+            appearance="secondary"
+            handleClick={(e) => this.removeItem(e, data)}
+          />
         </div>
       );
     });
 
     return (
       <main className="js-main container max-w-4xl mx-auto mb-6 px-4">
-        <div className="grid gap-4 grid-cols-2">
+        <div className="grid gap-8 grid-cols-2">
           <div>
             <h2 className="block my-4 text-2xl font-bold">Personal information</h2>
 
